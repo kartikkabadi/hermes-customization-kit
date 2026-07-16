@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+unset PYTHONPATH
+unset PYTHONHOME
+exec "${HERMES_HOME:-$HOME/.hermes}/hermes-agent/venv/bin/hermes" "$@"

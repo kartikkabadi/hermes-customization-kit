@@ -1,0 +1,12 @@
+.DS_Store
+.env
+.env.*
+!.env.example
+!local/.env.local.example
+*.key
+*.pem
+*.p12
+*.pfx
+local/config.yaml
+local/config.private.yaml
+work/
