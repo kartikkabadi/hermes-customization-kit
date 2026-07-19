@@ -10,8 +10,9 @@ and the CLI/gateway behavior needed to support long-running work.
 
 ## Contents
 
-- `patches/hermes-customizations.patch` — the complete sanitized net source
-  delta against the pinned upstream base.
+- `patches/*.patch` — a numbered patch series containing the sanitized net
+  source delta against the pinned upstream base. See `patches/README.md` for
+  the feature breakdown.
 - `local/config.sanitized.yaml` — non-secret behavioral settings exported from
   the working installation.
 - `local/.env.local.example` — names of locally used environment variables,
@@ -40,7 +41,7 @@ sanitized config and CuaDriver integration.
 
 ## Compatibility
 
-The patch is pinned to upstream commit
+The patch series is pinned to upstream commit
 `6997dc81cd21dc88c6cb808a1fb3626b6ce71254` from 2026-07-14. Applying it to a
 newer Hermes revision may require a deliberate rebase and regression test pass.
 

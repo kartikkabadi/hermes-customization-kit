@@ -1,6 +1,6 @@
 # Customization map
 
-The patch captures the net result of 24 local commits on top of Hermes Agent
+The patch series captures the net result of 24 local commits on top of Hermes Agent
 commit `6997dc81cd21dc88c6cb808a1fb3626b6ce71254`. Before privacy sanitization,
 the delta covered 58 files with 12,531 insertions and 389 deletions. The final
 overlay contains 57 files with 12,096 insertions and 389 deletions.
