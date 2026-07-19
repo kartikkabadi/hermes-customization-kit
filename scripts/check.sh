@@ -9,5 +9,34 @@ if [[ -z "$target" ]]; then
   exit 2
 fi
 
-git -C "$target" apply --check "$kit_dir/patches/hermes-customizations.patch"
+if [[ ! -d "$target" ]]; then
+  echo "Target directory does not exist: $target" >&2
+  exit 2
+fi
+
+if ! git -C "$target" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+  echo "Target is not a git repository: $target" >&2
+  exit 2
+fi
+
+base_file="$kit_dir/UPSTREAM_BASE"
+if [[ -f "$base_file" ]]; then
+  base="$(tr -d '[:space:]' < "$base_file")"
+  if [[ -n "$base" ]]; then
+    head="$(git -C "$target" rev-parse HEAD)"
+    if [[ "$head" != "$base" ]]; then
+      echo "Expected Hermes base $base, found $head." >&2
+      echo "Check out the pinned base or rebase the patch deliberately." >&2
+      exit 1
+    fi
+  fi
+fi
+
+patch="$kit_dir/patches/hermes-customizations.patch"
+if [[ ! -f "$patch" ]]; then
+  echo "Patch file not found: $patch" >&2
+  exit 2
+fi
+
+git -C "$target" apply --check "$patch"
 echo "Patch applies cleanly to $target"

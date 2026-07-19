@@ -25,9 +25,12 @@ def main() -> None:
     args = parser.parse_args()
     findings: list[tuple[Path, int, str]] = []
 
-    for path in args.path.rglob("*"):
-        if not path.is_file() or ".git" in path.parts:
-            continue
+    if args.path.is_file():
+        paths = [args.path]
+    else:
+        paths = [p for p in args.path.rglob("*") if p.is_file() and ".git" not in p.parts]
+
+    for path in paths:
         try:
             text = path.read_text()
         except (UnicodeDecodeError, OSError):
