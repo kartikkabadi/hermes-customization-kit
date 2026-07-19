@@ -621,24 +621,24 @@ platform_toolsets:
   google_chat:
   - hermes-google_chat
 custom_providers:
-- name: Opengateway.gitlawb.com
-  base_url: https://opengateway.gitlawb.com/v1
+- name: <set-locally>
+  base_url: <set-locally>
   api_key: <set-via-environment>
   model: minimax/minimax-m3
   api_mode: chat_completions
   models:
     minimax/minimax-m3:
       context_length: 1000000
-- name: Api.tokenrouter.com
-  base_url: https://api.tokenrouter.com/v1
+- name: <set-locally>
+  base_url: <set-locally>
   api_key: <set-via-environment>
   model: MiniMax-M3
   api_mode: chat_completions
   models:
     MiniMax-M3:
       context_length: 1000000
-- name: Api.pioneer.ai
-  base_url: https://api.pioneer.ai/v1
+- name: <set-locally>
+  base_url: <set-locally>
   api_key: <set-via-environment>
   model: XiaomiMiMo/MiMo-V2.5-Pro
   api_mode: chat_completions
