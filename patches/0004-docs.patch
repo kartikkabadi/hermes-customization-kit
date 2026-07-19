@@ -1,0 +1,25 @@
+diff --git a/website/docs/user-guide/configuration.md b/website/docs/user-guide/configuration.md
+index c4f9e84..9379a98 100644
+--- a/website/docs/user-guide/configuration.md
++++ b/website/docs/user-guide/configuration.md
+@@ -630,6 +630,20 @@ Raise it when you intentionally keep larger identity or project-context files an
+ context_file_max_chars: 25000
+ ```
+ 
++For very large project instruction files, Hermes can compile context on demand
++instead of resending the whole file on every turn:
++
++```yaml
++context_files_mode: full       # historical behavior (default)
++context_files_mode: reference  # bounded heading/lead index + per-turn retrieval
++context_files_mode: sparse     # tiny pointer + per-turn exact-section retrieval
++```
++
++`reference` and `sparse` preserve the source files unchanged. They activate
++only when the session has `read_file` or the deferred tool bridge available;
++otherwise Hermes automatically uses `full`. The environment variable
++`HERMES_CONTEXT_FILES_MODE` can temporarily override the configured value.
++
+ ## File Read Safety
+ 
+ Controls how much content a single `read_file` call can return. Reads that exceed the limit are rejected with an error telling the agent to use `offset` and `limit` for a smaller range. This prevents a single read of a minified JS bundle or large data file from flooding the context window.

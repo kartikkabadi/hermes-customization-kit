@@ -27,7 +27,7 @@ def make_fake_kit(tmp_path: Path, hermes_base: str) -> Path:
     (kit / "UPSTREAM_BASE").write_text(hermes_base + "\n")
     patches = kit / "patches"
     patches.mkdir()
-    (patches / "hermes-customizations.patch").write_text(
+    (patches / "0001-test.patch").write_text(
         "diff --git a/foo.txt b/foo.txt\n"
         "index 1234567..89abcde 100644\n"
         "--- a/foo.txt\n"

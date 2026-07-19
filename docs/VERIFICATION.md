@@ -3,11 +3,11 @@
 Verified on 2026-07-16 against upstream Hermes Agent commit
 `6997dc81cd21dc88c6cb808a1fb3626b6ce71254`.
 
-- Patch dry-run: passed.
-- Patch apply to a fresh clean checkout: passed.
+- Patch series dry-run: passed.
+- Patch series apply to a fresh clean checkout: passed.
 - Applied-tree comparison with the sanitized source tree: identical.
-- Patch source `git diff --check`: passed. Repository checks exclude the patch
-  artifact itself because unified-diff context lines intentionally end in a
+- Patch source `git diff --check`: passed. Repository checks exclude patch
+  artifacts because unified-diff context lines intentionally end in a
   single diff-prefix space.
 - Focused Hermes tests: 806 passed, 0 failed across 18 test files.
 - Anonymized Safari accessibility fixture: all 10 filtering tests passed.

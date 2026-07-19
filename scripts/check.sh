@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+shopt -s nullglob
+
 kit_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 target="${1:-}"
 
@@ -32,11 +34,14 @@ if [[ -f "$base_file" ]]; then
   fi
 fi
 
-patch="$kit_dir/patches/hermes-customizations.patch"
-if [[ ! -f "$patch" ]]; then
-  echo "Patch file not found: $patch" >&2
+patches=("$kit_dir"/patches/*.patch)
+if [[ ${#patches[@]} -eq 0 ]]; then
+  echo "No patch files found in $kit_dir/patches/" >&2
   exit 2
 fi
 
-git -C "$target" apply --check "$patch"
-echo "Patch applies cleanly to $target"
+for patch in "${patches[@]}"; do
+  git -C "$target" apply --check "$patch"
+done
+
+echo "Patch series applies cleanly to $target"

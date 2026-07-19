@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+shopt -s nullglob
+
 kit_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 target="${1:-$PWD}"
 base_file="$kit_dir/UPSTREAM_BASE"
-patch="$kit_dir/patches/hermes-customizations.patch"
 
 if [[ ! -f "$base_file" ]]; then
   echo "Missing upstream base file: $base_file" >&2
@@ -39,12 +40,18 @@ if [[ "$head" != "$base" ]]; then
   exit 1
 fi
 
-if [[ ! -f "$patch" ]]; then
-  echo "Patch file not found: $patch" >&2
+patches=("$kit_dir"/patches/*.patch)
+if [[ ${#patches[@]} -eq 0 ]]; then
+  echo "No patch files found in $kit_dir/patches/" >&2
   exit 1
 fi
 
-git -C "$target" apply --check "$patch"
-git -C "$target" apply "$patch"
+for patch in "${patches[@]}"; do
+  git -C "$target" apply --check "$patch"
+done
+
+for patch in "${patches[@]}"; do
+  git -C "$target" apply "$patch"
+done
 
 echo "Applied Hermes customization overlay to $target"
