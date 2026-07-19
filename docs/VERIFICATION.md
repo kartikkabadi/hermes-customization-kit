@@ -1,14 +1,23 @@
 # Verification record
 
-Verified on 2026-07-16 against upstream Hermes Agent commit
+## Re-verification on 2026-07-19
+
+- Patch series dry-run (`scripts/check.sh`): passed against
+  `NousResearch/hermes-agent@6997dc81cd21dc88c6cb808a1fb3626b6ce71254`.
+- Patch series apply (`scripts/apply.sh`): passed against the same clean
+  checkout.
+- Applied-tree comparison: the `0001-0004` series produces the same 47-file,
+  8,965-insertion overlay as the previous single `patches/hermes-customizations.patch`.
+- Kit validation:
+  - `python3 -m pytest tests/ -q` — 18 passed.
+  - `python3 scripts/scan-secrets.py .` — no findings.
+  - `git diff --check -- . ':(exclude)patches/*.patch'` — clean.
+
+## Original verification on 2026-07-16
+
+Verified against upstream Hermes Agent commit
 `6997dc81cd21dc88c6cb808a1fb3626b6ce71254`.
 
-- Patch series dry-run: passed.
-- Patch series apply to a fresh clean checkout: passed.
-- Applied-tree comparison with the sanitized source tree: identical.
-- Patch source `git diff --check`: passed. Repository checks exclude patch
-  artifacts because unified-diff context lines intentionally end in a
-  single diff-prefix space.
 - Focused Hermes tests: 806 passed, 0 failed across 18 test files.
 - Anonymized Safari accessibility fixture: all 10 filtering tests passed.
 - Config export: all 554 key paths preserved; 28 sensitive or identity values

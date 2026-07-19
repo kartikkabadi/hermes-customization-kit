@@ -1,5 +1,8 @@
 # Hermes Computer-Use Customization Kit
 
+[![CI](https://github.com/kartikkabadi/hermes-customization-kit/actions/workflows/ci.yml/badge.svg)](https://github.com/kartikkabadi/hermes-customization-kit/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 A compact, private overlay for Hermes Agent. It packages only the local changes
 made on top of Nous Research's Hermes Agent—no upstream source mirror, runtime
 state, credentials, histories, memories, logs, or compiled binaries.
@@ -47,3 +50,16 @@ newer Hermes revision may require a deliberate rebase and regression test pass.
 
 Hermes Agent is MIT-licensed by Nous Research. This kit retains that license
 for the patch content derived from and modifying Hermes Agent.
+
+See [NOTICE](NOTICE) for the full attribution.
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for local validation steps and patch
+update guidance.
+
+## Security
+
+This repository intentionally excludes credentials, histories, screenshots, and
+private state. See [docs/SECURITY.md](docs/SECURITY.md) and
+[SECURITY.md](SECURITY.md) for the privacy boundary and how to rescan exports.
