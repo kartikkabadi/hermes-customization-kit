@@ -45,6 +45,19 @@ def is_secret_key(name: str) -> bool:
     )
 
 
+def _sanitize_provider(provider: Any, home: Path) -> Any:
+    """Redact user-specific provider metadata while preserving public model metadata."""
+    if not isinstance(provider, dict):
+        return sanitize(provider, home)
+    sanitized = sanitize(provider, home)
+    for key in ("name", "base_url"):
+        if key in sanitized and sanitized[key] not in {
+            "<set-locally>", "<set-via-environment>", "<redacted>",
+        }:
+            sanitized[key] = "<set-locally>"
+    return sanitized
+
+
 def sanitize(value: Any, home: Path, key: str = "") -> Any:
     name = normalized(key)
     if is_secret_key(name):
@@ -53,6 +66,8 @@ def sanitize(value: Any, home: Path, key: str = "") -> Any:
         return [] if isinstance(value, list) else "<set-locally>"
     if name in PRIVATE_CONTENT_KEYS:
         return {} if isinstance(value, dict) else "<set-locally>"
+    if name == "custom_providers" and isinstance(value, list):
+        return [_sanitize_provider(item, home) for item in value]
     if isinstance(value, dict):
         return {k: sanitize(v, home, str(k)) for k, v in value.items()}
     if isinstance(value, list):
