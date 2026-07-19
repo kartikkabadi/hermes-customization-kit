@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install helper script dependencies
+        run: pip install -r requirements.txt
+
+      - name: Compile helper scripts
+        run: python3 -m py_compile scripts/export-config.py scripts/scan-secrets.py
+
+      - name: Scan for credential signatures
+        run: python3 scripts/scan-secrets.py .
+
+      - name: Check for whitespace errors
+        run: git diff --check -- . ':(exclude)patches/*.patch'
+
+      - name: Verify patch applies to pinned upstream
+        run: |
+          set -euo pipefail
+          base=$(tr -d '[:space:]' < UPSTREAM_BASE)
+          test -n "$base" || { echo "UPSTREAM_BASE is empty"; exit 1; }
+
+          workdir=$(mktemp -d)
+          trap 'rm -rf "$workdir"' EXIT
+
+          mkdir -p "$workdir/hermes-agent"
+          cd "$workdir/hermes-agent"
+          git init -q
+          git remote add origin https://github.com/NousResearch/hermes-agent.git
+          git fetch --depth=1 origin "$base"
+          git checkout -q "$base"
+
+          "$GITHUB_WORKSPACE/scripts/apply.sh" "$PWD"
