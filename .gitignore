@@ -10,3 +10,8 @@
 local/config.yaml
 local/config.private.yaml
 work/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/

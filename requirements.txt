@@ -1,0 +1,2 @@
+# Python dependencies for the helper scripts in scripts/
+pyyaml>=6.0
