@@ -1,6 +1,7 @@
 # Hermes Computer-Use Customization Kit
 
 [![CI](https://github.com/kartikkabadi/hermes-customization-kit/actions/workflows/ci.yml/badge.svg)](https://github.com/kartikkabadi/hermes-customization-kit/actions/workflows/ci.yml)
+[![GitHub release](https://img.shields.io/github/v/release/kartikkabadi/hermes-customization-kit)](https://github.com/kartikkabadi/hermes-customization-kit/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 A compact, private overlay for Hermes Agent. It packages only the local changes
