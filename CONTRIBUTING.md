@@ -21,9 +21,9 @@ Thanks for helping improve this overlay.
 
 ## Patch changes
 
-- The patch in `patches/` is pinned to the upstream commit in `UPSTREAM_BASE`.
-- If you update the patch, update `UPSTREAM_BASE`, `docs/VERIFICATION.md`, and the `Compatibility` section in `README.md`.
-- Keep the patch file free of screenshots, private paths, and credentials.
+- The patch series in `patches/*.patch` is pinned to the upstream commit in `UPSTREAM_BASE`.
+- If you update the patches, update `UPSTREAM_BASE`, `docs/VERIFICATION.md`, `patches/README.md`, and the `Compatibility` section in `README.md`.
+- Keep the patch files free of screenshots, private paths, and credentials.
 
 ## Pull requests
 
