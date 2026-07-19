@@ -1,0 +1,8 @@
+Hermes Customization Kit
+Copyright (c) 2026 Hermes Customization Kit contributors
+
+This project is an overlay for Hermes Agent. The patch and supporting
+configuration files modify and extend Hermes Agent, which is
+Copyright (c) 2025 Nous Research and licensed under the MIT License.
+
+See LICENSE for the full MIT license text.
